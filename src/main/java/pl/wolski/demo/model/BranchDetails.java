@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 public class BranchDetails {
 
     private String name;
-    private Commit commit;
+    private CommitDetails commit;
 
 }
