@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BranchOwner {
+public class RepositoryOwner {
 
     private String login;
 }

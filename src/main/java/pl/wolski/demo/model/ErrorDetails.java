@@ -5,15 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class RepositoryDetails {
-
-    private String name;
-    private RepositoryOwner owner;
-    private List<BranchDetails> branches;
+@NoArgsConstructor
+public class ErrorDetails {
+    int status;
+    String message;
 }
