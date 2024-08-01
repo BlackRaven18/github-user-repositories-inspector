@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestClientResponseException;
 import pl.wolski.demo.model.ErrorDetails;
 import pl.wolski.demo.model.RepositoryDetails;
 import pl.wolski.demo.service.GitHubService;
@@ -28,15 +29,16 @@ public class GitHubController {
 
         try {
             List<RepositoryDetails> userReposDetails = gitHubService.getUserReposDetails(username);
-            response = jsonUtils.convertObjectToJSONString(userReposDetails);
+            response = jsonUtils.convertObjectToJsonString(userReposDetails);
 
-        } catch (Exception e) {
+        } catch (RestClientResponseException e) {
 
             int errorMessageStartIndex = e.getMessage().indexOf("{");
             String errorMessage = e.getMessage().substring(errorMessageStartIndex);
 
-            ErrorDetails errorDetails = jsonUtils.convertJSONStringToObject(errorMessage, ErrorDetails.class);
-            String errorResponse = jsonUtils.convertObjectToJSONString(errorDetails);
+            ErrorDetails errorDetails = jsonUtils.convertJsonStringToObject(errorMessage, ErrorDetails.class);
+            errorDetails.setStatus(e.getStatusCode().value());
+            String errorResponse = jsonUtils.convertObjectToJsonString(errorDetails);
 
             return ResponseEntity.status(errorDetails.getStatus()).body(errorResponse);
         }
