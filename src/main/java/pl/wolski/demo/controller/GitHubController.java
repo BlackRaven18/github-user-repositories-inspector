@@ -33,10 +33,7 @@ public class GitHubController {
 
         } catch (RestClientResponseException e) {
 
-            int errorMessageStartIndex = e.getMessage().indexOf("{");
-            String errorMessage = e.getMessage().substring(errorMessageStartIndex);
-
-            ErrorDetails errorDetails = jsonUtils.convertJsonStringToObject(errorMessage, ErrorDetails.class);
+            ErrorDetails errorDetails = jsonUtils.convertJsonStringToObject(e.getResponseBodyAsString(), ErrorDetails.class);
             errorDetails.setStatus(e.getStatusCode().value());
             String errorResponse = jsonUtils.convertObjectToJsonString(errorDetails);
 
