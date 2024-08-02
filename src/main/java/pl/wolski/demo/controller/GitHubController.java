@@ -22,7 +22,7 @@ public class GitHubController {
     private JsonUtils jsonUtils;
     private GitHubService gitHubService;
 
-    @GetMapping("/branches/{username}")
+    @GetMapping("/repos/{username}")
     public ResponseEntity<String> getUserBranches(@PathVariable String username) {
 
         String response;
