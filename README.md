@@ -104,8 +104,8 @@ To get a list of user repositories, follow these steps:
 
     ```json
     { 
-        "status":  ${responseCode}, 
-        "message":  ${whyHasItHappened} 
+        "status":  "responseCode", 
+        "message":  "whyHasItHappened" 
     }
     ```
     **Example**
